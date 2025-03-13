@@ -6,33 +6,39 @@ const rl = readline.createInterface({
 });
 
 rl.question('Qual seu nome de Herói? ', (nameHero) => {
-  let xpAtual = 100; 
-  let nivelAtual = 1;
-  let uppar = xpAtual; 
-  let category = ""; 
+    let xpAtual = 100; 
+    let nivelAtual = 1;
+    let uppar = xpAtual; 
+    let category = ""; 
+    let startJourney = false;
 
-  console.log("Seu nome é: " + nameHero +
-    ", seu nível atual é: " + nivelAtual + ", quantidade de XP atual é: " + xpAtual + ".");
+    console.log("Seu nome é: " + nameHero +
+      ", seu nível atual é: " + nivelAtual + ", quantidade de XP atual é: " + xpAtual + ".");
 
-  if (xpAtual < 1000) {
-    console.log(nameHero, "Você irá uppar agora!");
-    console.log(nameHero, "Primeiro objetivo alcançar categoria FERRO! Boa jornada!")
+    rl.question('Deseja iniciar sua jornada, a busca pela categoria de FERRO? (sim/não) ', (answer) => {
+      startJourney = answer.toLowerCase() === 'sim';
 
-    do {
-      uppar += 100;
-      console.log("Seu XP atual:", uppar);
-    } while (uppar < 1000);
+    if (startJourney) {
+      console.log(nameHero, "Você irá uppar agora!");
+      console.log(nameHero, "Primeiro objetivo alcançar categoria FERRO! Boa jornada!")
 
-    xpAtual = uppar; 
-    nivelAtual = 10; 
-    category = "FERRO"; 
-  } else {
-    nivelAtual = 10; 
-    category = "FERRO"; 
-  }
+      do {
+        uppar += 100;
+        console.log("Seu XP atual:", uppar);
+      } while (uppar < 1000);
 
-  console.log("Parabéns, " + nameHero + "! Agora você está no nível " + nivelAtual + 
-    " com " + xpAtual + " XP, categoria de " + category);
+      xpAtual = uppar; 
+      nivelAtual = 10; 
+      category = "FERRO"; 
 
-  rl.close(); 
+      console.log("Parabéns, " + nameHero + "! Agora você está no nível " + nivelAtual + 
+        " com " + xpAtual + " XP, categoria de " + category);
+    } else {
+      console.log("Jornada não iniciada. Até a próxima! ❌");
+
+    }
+
+    rl.close(); 
+  });
+
 });
